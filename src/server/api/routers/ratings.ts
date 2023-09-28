@@ -1,5 +1,7 @@
 import { ZodSchema, z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { kv } from "@vercel/kv";
+import { uuid } from "uuidv4";
 
 type RawRating = {
   Const: string;
@@ -36,7 +38,11 @@ const ratingSchema: ZodSchema<RawRating[]> = z.array(
 );
 
 export const ratingsRouter = createTRPCRouter({
-  upload: publicProcedure.input(ratingSchema).mutation(({ ctx, input }) => {
-    return "";
-  }),
+  upload: publicProcedure
+    .input(ratingSchema)
+    .mutation(async ({ ctx, input }) => {
+      const id = uuid();
+      await kv.set(id, input, {});
+      return id;
+    }),
 });
