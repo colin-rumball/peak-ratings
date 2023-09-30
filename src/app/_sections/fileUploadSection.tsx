@@ -1,13 +1,14 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Dropzone from "~/app/_components/dropzone";
 import { trpc } from "../_trpc/client";
-import { parseCSV as parseCSVToJson } from "~/utils/csv-parser";
+import Link from "next/link";
 
 interface Props extends React.ComponentPropsWithoutRef<"section"> {}
 
 const FileUploadSection = (props: Props) => {
+  const [pageID, setPageID] = useState<string>();
   const uploadFile = trpc.ratings.upload.useMutation();
 
   const onDrop = useCallback(
@@ -15,15 +16,20 @@ const FileUploadSection = (props: Props) => {
       if (acceptedFiles.length === 0) return;
       const csvFile = acceptedFiles[0]!;
       const fileContents = await csvFile.text();
-      const ratings = await parseCSVToJson(fileContents);
-      const res = await uploadFile.mutateAsync(ratings);
+      const res = await uploadFile.mutateAsync(fileContents);
+      setPageID(res);
     },
     [uploadFile],
   );
   return (
     <section {...props}>
-      <div className="min-h-screen max-w-xl">
+      <div className="">
         <Dropzone onDrop={onDrop} />
+      </div>
+      <div className="my-3">
+        {pageID !== undefined && (
+          <Link href={`/ratings/${pageID}`}>View your ratings</Link>
+        )}
       </div>
     </section>
   );

@@ -18,7 +18,7 @@ type Rating = {
 
 const parser = csv();
 
-export const parseCSV = async (csvString: string): Promise<Rating[]> => {
+export const parseCSVToJson = async (csvString: string): Promise<Rating[]> => {
   const jsonArray: Rating[] = (await parser.fromString(csvString)) as Rating[];
   return jsonArray;
 };
