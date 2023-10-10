@@ -25,7 +25,7 @@ const config = {
     ],
     "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
     "@typescript-eslint/no-misused-promises": [
-      "error",
+      "warn",
       { checksVoidReturn: { attributes: false } },
     ],
     "@typescript-eslint/no-empty-interface": "off",

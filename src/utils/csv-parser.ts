@@ -1,6 +1,6 @@
 import csv from "csvtojson";
 
-type Rating = {
+export type RawRating = {
   Const: string;
   "Date Rated": string;
   Directors: string;
@@ -18,7 +18,11 @@ type Rating = {
 
 const parser = csv();
 
-export const parseCSVToJson = async (csvString: string): Promise<Rating[]> => {
-  const jsonArray: Rating[] = (await parser.fromString(csvString)) as Rating[];
+export const parseCSVToJson = async (
+  csvString: string,
+): Promise<RawRating[]> => {
+  const jsonArray: RawRating[] = (await parser.fromString(
+    csvString,
+  )) as RawRating[];
   return jsonArray;
 };
