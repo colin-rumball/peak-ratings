@@ -8,8 +8,10 @@ const Page = () => {
     <main className="min-w-full">
       <div className="m-4">
         <p>
-          Login to your IMDB account, click on &quot;Your ratings&quot; under
-          the profile drop down in the upper right corner.
+          You can export your ratings history anytime by logging into your IMDb
+          account, heading to your ratings page and selecting the three dots ⋮
+          in the upper right corner. Then select export, this will create a .csv
+          file that you can save and upload here.
         </p>
         <Image src={yourRatingsImage} alt="screenshot of imdb profile menu" />
       </div>
