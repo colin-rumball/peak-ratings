@@ -9,6 +9,7 @@ function useRatingsData(id: string) {
   const [ratingsData, setRatingsData] = useState<MediaContentMap | null>(null);
 
   useEffect(() => {
+    console.log(getCSVData.data);
     if (!getCSVData.isSuccess) return;
 
     parseCSVToJson(getCSVData.data)
