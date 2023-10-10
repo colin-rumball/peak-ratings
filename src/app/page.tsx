@@ -1,10 +1,13 @@
 import Link from "next/link";
 import FileUploadSection from "../components/fileUploadSection";
+import Image from "next/image";
+import logoPNG from "~/../public/logo.png";
 
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
-      <div className="py-8">
+      <div className="flex flex-col items-center py-8">
+        <Image src={logoPNG} alt="site logo" priority />
         <h1 className="p-2 text-center text-3xl">Analyze Your IMDB Ratings</h1>
         <p className="text-center">
           Grab your data from your IMDB account and drop it into the box below.
