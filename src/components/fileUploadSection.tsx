@@ -23,6 +23,7 @@ const FileUploadSection = (props: Props) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // TODO: add link incase redirect fails
+  // TODO: add uploading state
   return (
     <section {...getRootProps()} className="w-full flex-1" {...props}>
       <input {...getInputProps()} />

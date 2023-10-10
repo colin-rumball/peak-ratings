@@ -40,84 +40,101 @@ const DataDashboard = ({ id, ...props }: Props) => {
 
   return (
     <section
-      className={cn(props.className, "grid grid-cols-4 gap-2 lg:grid-cols-6")}
+      className={cn(props.className, "grid grid-cols-4 gap-4")}
       {...props}
     >
       {/* SINGLE VALUES */}
-      <CardContainer
-        subTitle="Movies Rated"
-        className="col-span-2 flex flex-col justify-between lg:col-span-1"
-      >
-        {chartData.totalMoviesRated.toString()}
-      </CardContainer>
-      <CardContainer
-        subTitle="Average Rating"
-        className="col-span-2 flex flex-col justify-between lg:col-span-1"
-      >
-        {chartData.averageOverallRating.toFixed(2).toString()}
-      </CardContainer>
-      <CardContainer
-        subTitle="Total Watch Time"
-        className="col-span-2 flex flex-col justify-between lg:col-span-1"
-      >
-        {`${Math.floor(chartData.totalWatchTime / 60)
-          .toString()
-          .padStart(2, "0")} hours, ${(chartData.totalWatchTime % 60)
-          .toString()
-          .padStart(2, "0")} minutes`}
-      </CardContainer>
-      <CardContainer
-        subTitle="Been Rating Since"
-        className="col-span-2 flex flex-col justify-between lg:col-span-1"
-      >
-        {chartData.earliestRatingDate.toDateString()}
-      </CardContainer>
+      <div className="col-span-4 grid grid-cols-4 gap-4">
+        <CardContainer
+          subTitle="Movies Rated"
+          className="col-span-2 flex flex-col justify-between lg:col-span-1"
+        >
+          {chartData.totalMoviesRated.toString()}
+        </CardContainer>
+        <CardContainer
+          subTitle="Average Rating"
+          className="col-span-2 flex flex-col justify-between lg:col-span-1"
+        >
+          {chartData.averageOverallRating.toFixed(2).toString()}
+        </CardContainer>
+        <CardContainer
+          subTitle="Total Watch Time"
+          className="col-span-2 flex flex-col justify-between lg:col-span-1"
+        >
+          {`${Math.floor(chartData.totalWatchTime / 60)
+            .toString()
+            .padStart(2, "0")} hours, ${(chartData.totalWatchTime % 60)
+            .toString()
+            .padStart(2, "0")} minutes`}
+        </CardContainer>
+        <CardContainer
+          subTitle="Been Rating Since"
+          className="col-span-2 flex flex-col justify-between lg:col-span-1"
+        >
+          {chartData.earliestRatingDate.toDateString()}
+        </CardContainer>
+      </div>
+
       {/* CHARTS */}
-      <CardContainer title="Rating Distribution" className="col-span-4">
+      <CardContainer
+        title="Rating Distribution"
+        className="col-span-4 lg:col-span-2"
+      >
         <LineGraph chartData={chartData.ratingDistribution} />
       </CardContainer>
       <CardContainer
-        title="Genre Count"
-        subTitle="Genres you frequently rate"
-        className="col-span-4"
+        title="Ratings over the years"
+        className="col-span-4 lg:col-span-2"
       >
-        <ol className="z-10 -mb-8">
-          {Array.from(chartData.moviesByGenre)
-            .slice(0, 3)
-            .map(([genre, movies]) => (
-              <li key={genre} className="flex justify-between">
-                <span>{genre}</span>
-                <span>{movies.length}</span>
-              </li>
-            ))}
-        </ol>
-        <DoughnutChart chartData={chartData.genreDistribution} />
+        <ScatterChart chartData={chartData.yearAndRating} />
       </CardContainer>
-      <CardContainer title="Genre Count by Year" className="col-span-4">
+      <div className="col-span-4 lg:col-start-2 lg:col-end-4">
+        <CardContainer
+          title="Genre Count"
+          subTitle="Genres you frequently rate"
+          className="col-span-4"
+        >
+          <ol className="z-10 -mb-8">
+            {Array.from(chartData.moviesByGenre)
+              .slice(0, 3)
+              .map(([genre, movies]) => (
+                <li key={genre} className="flex justify-between">
+                  <span>{genre}</span>
+                  <span>{movies.length}</span>
+                </li>
+              ))}
+          </ol>
+          <DoughnutChart chartData={chartData.genreDistribution} />
+        </CardContainer>
+      </div>
+      <CardContainer
+        title="Genre Count by Year"
+        className="col-span-4  lg:col-span-2"
+      >
         <BarChart stacked={true} chartData={chartData.genreCountByDecade} />
       </CardContainer>
-      <CardContainer title="Rating by Year" className="col-span-4">
+      <CardContainer
+        title="Rating by Year"
+        className="col-span-4  lg:col-span-2"
+      >
         <LineGraph chartData={chartData.ratingByDecade} />
       </CardContainer>
       <CardContainer
         title="Overrated"
         subTitle="Movies you think are overrated"
-        className="col-span-4"
+        className="col-span-4  lg:col-span-2"
       >
         <BarChart chartData={chartData.overratedMovies} />
       </CardContainer>
       <CardContainer
         title="Underrated"
         subTitle="Movies you think are underrated"
-        className="col-span-4"
+        className="col-span-4  lg:col-span-2"
       >
         <BarChart chartData={chartData.underratedMovies} />
       </CardContainer>
-      <CardContainer title="Ratings over the years" className="col-span-4">
-        <ScatterChart chartData={chartData.yearAndRating} />
-      </CardContainer>
       {/* LISTS */}
-      <CardContainer title="Common Directors" className="col-span-2">
+      <CardContainer title="Common Directors" className="col-span-1">
         <ol>
           {Array.from(chartData.moviesByDirector.entries())
             .splice(0, 5)
@@ -129,7 +146,7 @@ const DataDashboard = ({ id, ...props }: Props) => {
             ))}
         </ol>
       </CardContainer>
-      <CardContainer title="Favorite Genres" className="col-span-2">
+      <CardContainer title="Favorite Genres" className="col-span-1">
         <ol>
           {/* TODO: yikes */}
           {Array.from(chartData.moviesByGenre)
@@ -154,7 +171,7 @@ const DataDashboard = ({ id, ...props }: Props) => {
       <CardContainer
         title="Unpopular movies you've rated"
         subTitle="Based on the total number of votes on IMDB"
-        className="col-span-4"
+        className="col-span-4 lg:col-span-2"
       >
         <ol>
           {chartData.unpopularMovies.map((movie) => (
@@ -168,7 +185,7 @@ const DataDashboard = ({ id, ...props }: Props) => {
       <CardContainer
         title="Popular movies you've rated"
         subTitle="Based on the total number of votes on IMDB"
-        className="col-span-4"
+        className="col-span-4 lg:col-span-2"
       >
         <ol>
           {chartData.popularMovies.map((movie) => (
@@ -179,7 +196,7 @@ const DataDashboard = ({ id, ...props }: Props) => {
           ))}
         </ol>
       </CardContainer>
-      <CardContainer title="Genre Ratings" className="col-span-4">
+      <CardContainer title="Genre Ratings" className="col-span-4 lg:col-span-2">
         <FilteredList listItems={filteredGenres} />
       </CardContainer>
     </section>
