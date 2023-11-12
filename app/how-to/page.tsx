@@ -1,7 +1,7 @@
 import Image from "next/image";
-import yourRatingsImage from "@/public/imdb-your-ratings.png";
-import menuImage from "@/public/imdb-menu.png";
-import exportImage from "@/public/imdb-export.png";
+import yourRatingsImage from "@/public/images/imdb-your-ratings.png";
+import menuImage from "@/public/images/imdb-menu.png";
+import exportImage from "@/public/images/imdb-export.png";
 
 const Page = () => {
   return (
