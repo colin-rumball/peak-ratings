@@ -20,7 +20,7 @@ function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} min-h-screen w-screen bg-slate-800 text-slate-200`}
+        className={`${inter.className} min-h-screen w-screen overflow-x-hidden bg-slate-800 text-slate-200`}
       >
         <header className="mb-20 h-20 w-screen bg-emerald-600">
           <div className="container m-auto flex h-full">
