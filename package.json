@@ -20,6 +20,7 @@
     "csvtojson": "^2.0.10",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.284.0",
+    "moviedb-promise": "^4.0.3",
     "next": "latest",
     "react": "latest",
     "react-chartjs-2": "^5.2.0",
