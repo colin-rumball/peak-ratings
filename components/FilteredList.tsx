@@ -2,7 +2,16 @@
 
 import { type ChangeEvent, useState } from "react";
 import { cn } from "@/lib/utils";
-import { type MediaContent } from "@/lib/hooks/useChartData";
+import { type MediaContent } from "@/lib/hooks/useRatingsData";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 interface Props extends React.ComponentPropsWithoutRef<"div"> {
   listItems: Map<string, MediaContent[]>;
@@ -14,19 +23,30 @@ function FilteredList({ className, listItems, ...props }: Props) {
     Array.from(listItems.keys())[0] ?? "",
   );
 
-  const onOptionChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedKey(event.target.value);
+  const onOptionChangeHandler = (newValue: string) => {
+    setSelectedKey(newValue);
   };
 
   return (
     <div className={cn(className, "")} {...props}>
       <div className="flex w-full justify-center">
-        <select onChange={onOptionChangeHandler} defaultValue={defaultValue}>
-          <option>Choose a genre</option>
-          {Array.from(listItems.keys()).map((option, index) => {
-            return <option key={index}>{option}</option>;
-          })}
-        </select>
+        <Select onValueChange={onOptionChangeHandler}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Choose a genre" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Genres</SelectLabel>
+              {Array.from(listItems.keys()).map((option, index) => {
+                return (
+                  <SelectItem key={index} value={option}>
+                    {option}
+                  </SelectItem>
+                );
+              })}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <ol>
         {listItems.get(selectedKey)?.map((movie, index) => {
