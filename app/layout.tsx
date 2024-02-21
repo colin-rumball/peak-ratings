@@ -1,40 +1,37 @@
 import "@/app/globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import Image from "next/image";
-import Logo from "@/public/images/logo.png";
-import Link from "next/link";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Inter, Six_Caps } from "next/font/google";
+import Providers from "@/components/providers/providers";
 
-export const metadata: Metadata = {
-  title: "My Ratings Monster",
-  description: "IMDB user ratings analysis",
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const sixCaps = Six_Caps({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400"],
+});
+
+export const metadata = {
+  title: "Peak Ratings",
+  description: "User ratings analysis",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-interface RootLayoutProps {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode;
-}
-
-function RootLayout({ children }: RootLayoutProps) {
+}) {
   return (
     <html lang="en">
       <body
-        className={`${inter.className} min-h-screen w-screen overflow-x-hidden bg-slate-800 text-slate-200`}
+        className={`${inter.className} ${sixCaps.variable} flex min-h-screen w-screen flex-col overflow-x-hidden bg-[url(/images/grain.png)]`}
       >
-        <header className="mb-20 h-20 w-screen bg-emerald-600">
-          <div className="container m-auto flex h-full">
-            <Link href="/" className="flex items-center">
-              <Image
-                src={Logo}
-                alt="Site Logo"
-                className="h-full w-auto object-contain p-2"
-              />
-            </Link>
-          </div>
-        </header>
-        {children}
-        <footer className="mt-20 h-28 w-screen bg-slate-900 text-slate-600">
+        <Providers>{children}</Providers>
+        <footer className="h-28 w-screen bg-accent/20">
           <div className="flex h-full w-full items-center justify-center">
             <p className="text-2xl">
               Made with ❤️ by{" "}
@@ -46,5 +43,3 @@ function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-
-export default RootLayout;

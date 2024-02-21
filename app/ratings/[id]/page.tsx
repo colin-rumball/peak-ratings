@@ -1,15 +1,30 @@
 import DataDashboard from "@/components/DataDashboard";
-import useRatingsData from "@/lib/hooks/useRatingsData";
+import Logo from "@/components/logo";
+import Page from "@/components/ui/page";
+import { api } from "@/convex/_generated/api";
+import { type Id } from "@/convex/_generated/dataModel";
+import { fetchQuery } from "convex/nextjs";
 
-const Page = async ({ params }: { params: { id: string } }) => {
+export default async function RatingsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
-  const ratingsData = await useRatingsData(id);
+  const ratingsFileUrl = await fetchQuery(api.ratings.getRatingsFileURL, {
+    id: id as Id<"ratings">,
+  });
+
+  if (!ratingsFileUrl) {
+    throw new Error("Ratings file not found");
+  }
 
   return (
-    <div className="min-w-full">
-      <DataDashboard id={id} ratingsData={ratingsData} />
-    </div>
+    <Page>
+      <div className="mt-12 flex items-center justify-center">
+        <Logo />
+      </div>
+      <DataDashboard ratingsFileUrl={ratingsFileUrl} />
+    </Page>
   );
-};
-
-export default Page;
+}

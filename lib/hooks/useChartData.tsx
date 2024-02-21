@@ -1,25 +1,6 @@
 import { type ChartData as ChartDataProp } from "chart.js";
 import { useMemo } from "react";
-
-export type MediaContentMap = Map<string, MediaContent>;
-
-export type MediaContent = {
-  imdbID: string;
-  dateRated: string;
-  directors: string[];
-  genres: string[];
-  avgIMDBRating: number;
-  numVotes: number;
-  releaseDate: string;
-
-  /** in minutes */
-  runtime: number;
-  title: string;
-  mediaType: "tvMiniSeries" | "tvSeries" | "movie";
-  url: string;
-  year: number;
-  userRating: number;
-};
+import { type MediaContent, type MediaContentMap } from "./useRatingsData";
 
 // TODO: string literals of possible genres
 export type Genre = string;
