@@ -54,11 +54,11 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
   }, []);
 
   return (
-    <div className="my-12 flex flex-col items-center justify-center">
+    <div className="my-12 flex flex-col items-center justify-center px-4 md:p-0">
       <motion.div
         animate={{ height }}
         transition={{ duration: 1 }}
-        className="w-[900px] overflow-hidden rounded-lg border bg-background/80"
+        className="w-full overflow-hidden rounded-lg border bg-background/80 md:w-[750px] md:px-8"
       >
         <div
           ref={containerRef}
@@ -79,7 +79,7 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
                 opacity: 1,
                 transition: { duration: 1 },
               }}
-              className={cn("grid grid-cols-4 gap-4 p-8")}
+              className={cn("grid grid-cols-4 gap-4 p-2 md:p-8")}
             >
               {/* SINGLE VALUES */}
               <div className="col-span-4 grid grid-cols-4 gap-4">
@@ -175,7 +175,10 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
                 <BarChart chartData={chartData.underratedMovies} />
               </CardContainer>
               {/* LISTS */}
-              <CardContainer title="Common Directors" className="col-span-1">
+              <CardContainer
+                title="Common Directors"
+                className="col-span-4 lg:col-span-2"
+              >
                 <ol>
                   {Array.from(chartData.moviesByDirector.entries())
                     .splice(0, 5)
@@ -187,7 +190,10 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
                     ))}
                 </ol>
               </CardContainer>
-              <CardContainer title="Favorite Genres" className="col-span-1">
+              <CardContainer
+                title="Favorite Genres"
+                className="col-span-4 lg:col-span-2"
+              >
                 <ol>
                   {/* TODO: yikes */}
                   {Array.from(chartData.moviesByGenre)

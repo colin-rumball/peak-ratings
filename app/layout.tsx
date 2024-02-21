@@ -2,6 +2,7 @@ import "@/app/globals.css";
 
 import { Inter, Six_Caps } from "next/font/google";
 import Providers from "@/components/providers/providers";
+import { TailwindIndicator } from "@/components/dev/TailwindIndicator";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,12 +34,13 @@ export default function RootLayout({
         <Providers>{children}</Providers>
         <footer className="h-28 w-screen bg-accent/20">
           <div className="flex h-full w-full items-center justify-center">
-            <p className="text-2xl">
+            <p className="text-lg md:text-2xl">
               Made with ❤️ by{" "}
               <a href="https://colinrumball.com">Colin Rumball</a>
             </p>
           </div>
         </footer>
+        <TailwindIndicator />
       </body>
     </html>
   );
