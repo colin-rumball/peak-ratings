@@ -126,13 +126,13 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
               >
                 <ScatterChart chartData={chartData.yearAndRating} />
               </CardContainer>
-              <div className="col-span-4 lg:col-start-2 lg:col-end-4">
+              <div className="col-span-4">
                 <CardContainer
                   title="Genre Count"
                   subTitle="Genres you frequently rate"
                   className="col-span-4"
                 >
-                  <ol className="z-10 -mb-8">
+                  <ol className="z-10 -mb-8 w-full">
                     {Array.from(chartData.moviesByGenre)
                       .slice(0, 3)
                       .map(([genre, movies]) => (
@@ -243,10 +243,7 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
                   ))}
                 </ol>
               </CardContainer>
-              <CardContainer
-                title="Genre Ratings"
-                className="col-span-4 lg:col-span-2"
-              >
+              <CardContainer title="Genre Ratings" className="col-span-4">
                 <FilteredList listItems={filteredGenres} />
               </CardContainer>
             </motion.section>
