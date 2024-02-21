@@ -58,7 +58,7 @@ const DataDashboard = ({ ratingsFileUrl }: { ratingsFileUrl: string }) => {
       <motion.div
         animate={{ height }}
         transition={{ duration: 1 }}
-        className="w-full overflow-hidden rounded-lg border bg-background/80 md:w-[750px] md:px-8"
+        className="w-full overflow-hidden rounded-lg border bg-background/80 md:w-[750px] md:px-8 lg:w-[960px]"
       >
         <div
           ref={containerRef}

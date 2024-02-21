@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <Page>
       <div className="mt-24 flex w-full flex-grow flex-col items-center gap-16 px-6 md:mt-48 md:p-0">
-        <section className="flex w-full flex-col items-center justify-center gap-4 rounded-lg border bg-background/80 p-8 md:w-[750px]">
+        <section className="flex w-full flex-col items-center justify-center gap-4 rounded-lg border bg-background/80 p-8 md:w-[750px] lg:w-[960px]">
           <Logo />
           <p>
             Grab your ratings info from your IMDB account and drop it into the
